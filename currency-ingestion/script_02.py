@@ -45,9 +45,21 @@ def freecurrency_source(
 
 if __name__ == "__main__":
     load_dotenv()
+    
     api_key = os.environ["API_KEY"]
+    bucket_url = os.environ["MINIO_BUCKET_URL"]
+    aws_access_key_id = os.environ["AWS_ACCESS_KEY_ID"]
+    aws_secret_access_key = os.environ["AWS_SECRET_ACCESS_KEY"]
+    endpoint_url = os.environ["MINIO_ENDPOINT_URL"]
 
-    destination = filesystem(bucket_url="data")
+    destination = filesystem(
+        bucket_url = bucket_url,
+        credentials = {
+            "aws_access_key_id" : aws_access_key_id,
+            "aws_secret_access_key" : aws_secret_access_key,
+            "endpoint_url" : endpoint_url
+        }
+    )
 
     pipeline_local = dlt.pipeline(
         pipeline_name = "freecurrency_pipeline",
