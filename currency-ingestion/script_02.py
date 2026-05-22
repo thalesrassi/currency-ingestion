@@ -67,5 +67,5 @@ if __name__ == "__main__":
         dataset_name = "latest",
     )
 
-    load_info = pipeline_local.run(freecurrency_source(api_key=api_key))
+    load_info = pipeline_local.run(freecurrency_source(api_key=api_key), loader_file_format="parquet")
     print(load_info)
